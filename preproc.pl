@@ -40,10 +40,11 @@ while(<>){
     s/\bAug \./August/ig;
     s/\bSep \./September/ig;
     s/\bOct \./October/ig;
-    s/\bMr \./Mr/g;
-    s/\bMs \./Ms/g;
-    s/\bMrs \./Mrs/g;
-    s/\bDoc \./doctor/gi;
+    s/\bMr\s?\./Mr/g;
+    s/\bMs\s?\./Ms/g;
+    s/\bMrs\s?\./Mrs/g;
+    s/\bDoc\s?\./doctor/gi;
+    s/\bDr\s?\./doctor/gi;
 
     # dequote
     s/ain 't/is not/ig;
@@ -77,9 +78,11 @@ while(<>){
     s/8/ eight /g;
     s/9/ nine /g;
 
+    tr/A-Z/a-z/;
+
     if($remove_punct){
         s/, /COMMA /g;
-        s/'(\s*)/QUOTE\1/g;
+        s/ '(\s*)/ QUOTE\1/g;
         s/; /SEMICOLON /g;
         s/\.(\s*)/PERIOD\1/g;
         s/\?(\s*)/QUESTIONMARK\1/g;
@@ -87,6 +90,5 @@ while(<>){
         s/\s*--\s*/ EMDASH /g;
         s/\s:\s/ COLON /g;
     }
-
     print
 }
